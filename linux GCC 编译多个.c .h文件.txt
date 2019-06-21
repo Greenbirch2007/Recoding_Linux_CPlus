@@ -1,0 +1,27 @@
+
+
+基本认识：
+
+#include <xxx>:首先去系统目录中找头文件，如果没有再到当前目录下找。像标准的头文件stdio.h,stdlib.h等用这个方法
+
+
+#include "xxx": 首先在当前目录下寻找，如果找不到，再到系统目录下寻找。
+这个用于include自定义的头文件，让系统优先实用当前目录中定义的
+
+
+复制代码
+1 /*=====test.c=======*/
+2 #include <stdio.h>  
+3    
+4 int main(void)  
+5 {  
+6         printf("Hello, world!\n");  
+7         return 0;  
+8 }  
+复制代码
+
+gcc -g test.c  -o test
+
+-g：为了GDB调试加入的参数；
+
+./test
