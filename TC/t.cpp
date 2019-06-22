@@ -1,15 +1,16 @@
-#include <stdio.h>
-
-class Trace {
-	public:
-		void print{char* s}{ printf("%s".s);}
-};
-
-
+#include <iostream>
 
 int main()
 {
-    Trace t;
-    t.print("begin main() \n");
-    t.print("end main() \n");
+    int value =2;
+    int pow = 10;
+    int result = 1;
+    
+    for(int cnt = 0; cnt != pow; ++cnt)
+        result *= value;
+    std:: cout << value
+                << " raised to the power of"            
+                << pow << ": \t"
+                << result << std:: endl;
+    return 0;
 }
