@@ -1,16 +1,14 @@
 #include <iostream>
+#include <string>
+
 
 int main()
+
 {
-    int value =2;
-    int pow = 10;
-    int result = 1;
-    
-    for(int cnt = 0; cnt != pow; ++cnt)
-        result *= value;
-    std:: cout << value
-                << " raised to the power of"            
-                << pow << ": \t"
-                << result << std:: endl;
+    int sum = 0;
+    for (int i = 0;i != 10 ; ++i)
+        sum += i;
+        std:: cout << "Sum from 0 to " << i
+                    << " is " << sum << std:: endl;
     return 0;
 }
