@@ -163,4 +163,71 @@ LDFLAGS: 链接库使用的选项  -L   -l
 Makefile提供了很多自动变量，但常用的为以下三个。这些自动变量只能
 在规则中的命令使用，其他地方使用都不行，
 
-https://mp.weixin.qq.com/s?__biz=MjM5NjQ4MjYwMQ==&mid=2664613637&idx=2&sn=f49a1ae66cce56ec635b2871f94090ec&chksm=bdcefc438ab97555f603302aeac94f7bda98a954deaa0249f9c569ce8c003e164040af225d9c&mpshare=1&scene=1&srcid=0624xID82dayOkzyzrOOPzAN&pass_ticket=vMLcGD73L00c0k7KpqkGObpaDDfkLzIuo0VT3fkikWV2FPhWu4RHaI5WwXICZbBO#rd
+$@  ---->   规则中的目标
+$< ----->  规则中的第一依赖条件
+$^  ----> 规则中的所有依赖条件
+
+
+
+app: main.c func1.c func2.c  gcc $^ - o $@
+
+其中：，$^表示  main.c func1.c   func2.c  , $^ 表示 main.c , $@ 表示ap
+
+模式规则
+
+模式规则是在目标及依赖条件中使用 % 来匹配对应的文件，比如在目录下有main.c
+func1.c,func2.c 三个文件，对这三个文件的编译可以由一条规则完成
+
+
+%.o:%.c  $(CC)  -c $<  $@
+
+这条模式规则表示：
+
+main.o  由 main.c 生成，func1.o 由 func1.c生成，
+
+func2.c由func2.c生成
+
+这就是模式规则的作用，可以一次匹配目录下的所有文件
+
+
+9. 函数
+
+Makefile 也为我们提供了大量的函数，同样经常使用到函数为以下两个。
+需要注意的是，Makefile中所有的函数必须都有返回值。
+在以下的例子中，假如目录下有main.c,func1.c,func2.c三个文件
+
+
+通配符
+
+
+用于查找指定目录下的指定类型的文件，跟的参数救赎目录+文件类型，比如：
+
+
+src = $(wildcard ./src/*.c)
+
+
+这句话表示：找到./src目录下所有后缀为.c的文件，并赋值变量 src
+
+命令执行完成后，src的值为： main.c func1.c  func2.c
+
+
+patsubst:
+
+匹配替换，例如以下例子，用于从src目录中找到所有.c结尾的文件，
+并将其替换为.o文件，并赋值给obj
+
+
+obj= $(patsubst %.c , %.o, $(src))
+
+
+命令执行完成后，obj的值为 main.o func1.o   func2.o
+
+
+特别地，如果要把所有.o文件放在obj目录下，可用一下方法：
+
+obj = $(patsubst ./src/%.c ,./obj/%.o, $(src))
+
+10. 小结
+
+
+Makefile 其实提供了很多功能，

@@ -1,0 +1,12 @@
+一个Makefile示例
+
+
+
+
+makefile，是由一系列规则组成的文件，一条基本的规则结构如下：
+
+<target> : <preequisties>
+[tab] <commands>
+
+即taget依赖于preequisites,那么怎么由preequisites生成的target的，
+那就定义在commands，那何时会更新target呢，则只要pre
