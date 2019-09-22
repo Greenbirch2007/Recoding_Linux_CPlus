@@ -44,3 +44,139 @@ cout在标准头文件iostream中被声明
 标识符cout位于std名字空间中，须用前缀std::进行修饰
 使用它必须先包含此文件
 << 是输出操作符，功能是将它右边的内容输出到它左边的指定设备
+
+第２章　数据类型，运算符和表达式
+
+数据类型有３类：基本类型，导出类型和用户定义类型
+
+
+基本类型：　逻辑型，字符型，整型，浮点型和空值型
+导出类型：　　数组，指针和引用
+用户定义类型：　　枚举类型和类类型
+
+c++不存在void型的常量和变量
+
+void *p;
+
+short long signed unsigned
+
+
+所有函数说明都必须指明返回值类型，没有返回值的函数应说明为void
+
+枚举常量
+
+
+enum <类型名>　{<枚举值表>};
+                   
+变量的定义
+
+存储类４个：
+
+auto, register, static,extern
+
+int a,b;
+char ch1 = 'a',ch2= 'A';
+int x=a+2*b;
+double d1,d2=31;
+
+
+2.3.2 变量的使用方式
+
+全局变量　局部变量
+
+生存区
+
+作用域
+
+变量的存储类属性
+用关键字auto 声明的局部变量称为自动变量
+用关键字register声明的局部变量称为寄存器变量
+用关键字static声明的变量称为静态变量
+用关键字extern声明的变量称为外部变量
+
+
+typedef <已有类型名><新类型名>
+
+typedef double profit;
+typedef int integer;
+profit a;
+integer b;
+
+符号常量声明语句
+
+const <类型名><符号常量名>=<初值表达式>
+
+const int a=5,b = a*4;
+const double pai = 3.14;
+
+
+运算符（操作符）和表达式
+
+测类型长度运算符(sizeof)
+
+(1) 参加运算的运算分量的数量和类型
+(2) 运算结果的数据类型
+(３)　运算的具体操作
+
+赋值匀速你
+
+<变量名>=<表达式>
+
+1.条件预算法
+<表达式１>?<表达式２>:<表达式３>
+
+２．逗号运算符
+
+<表达式１>,<表达式２>,<表达式３>
+
+
+３．sizeof(<运算分量>) 字长提取符
+
+４．　圆括号运算符
+(1) 圆括号用于函数调用
+<函数名>(<实参表>)
+
+(2) 圆括号用于强制类型转换
+
+(3) 圆括号用于类型构造
+<类型名>(<表达式>)
+
+double d=3;
+int n=int(d);
+char c =char(65);
+cout <<n << ''<<c<<endl;
+
+类型功能在功能上等价于强制类型转换
+
+(1) 数组下标运算符　　[](下标)
+(２)　指针运算符:*(取地址)　和&(值引用)
+(３)　动态存储分配运算符 new(分配)和delete(释放)
+(4) 作用域限定运算符::(类域或全局域)
+
+第３章　基本控制结构
+
+顺序结构，选择结构，循环结构
+
+
+char ch;
+int count =1;
+extern int error_num;
+
+const int MAX_LEN= 12;
+const double pi = 31.;
+
+double sqrt(double);
+int max(int a,int b) {return a>b? a:b;}
+
+
+typedef unsigned int ID;
+enum Color{R,E};
+struct Date{int y,m};
+class Employee;
+
+
+
+
+
+
+
