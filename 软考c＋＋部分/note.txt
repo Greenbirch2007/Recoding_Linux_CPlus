@@ -585,6 +585,223 @@ public:
 
 
 在c++中，动态绑定是通过虚函数来实现。虚函数的定义很简单，
+只要在成员函数原型前加一个关键字virtual即可。
+如果一个基类的成员函数定义为虚函数，
+那么它在所有派生类中也保持为虚函数，即使在派生了中省略了virtual关键字。
+要达到动态绑定的效果，基类和派生类的对应函数不仅名字相同，
+而且返回类型，参数个数和类型也必须相同
+
+
+仅定义了函数而没有函数实现的虚函数称为纯虚函数。定义纯虚函数的方法
+是在虚函数参数表右边括号加一个"=0"的后缀
+
+
+virtual void method(void) =0;
+
+含有纯虚函数的类，称为抽象类。c++不允许用抽象了创造对象，
+它只能被其他类继承
+
+对虚函数的限制是:只有类的成员函数才可以是虚函数；静态成员函数
+不能是虚函数；构造函数不能是虚函数，
+析构函数常常为虚函数
+
+
+#include<iostream.h>
+#include<math.h>
+
+class Figure{
+public:
+	virtual double getArea()=0;
+};
+
+class Rectangle:public Figure{
+
+protected:
+	double height;
+	double width;
+
+
+public:
+	Rectangle(){};
+	Rectangle(double height,double width){
+		this->height = height;
+		this->width = width;
+	}
+	double getArea(){
+	return height height * width;
+}
+};
+
+class Square:public Rectangle{
+public:
+	Square(double width){
+		this-> height = this->width=width;
+}
+};
+
+class Triangle:public Figuare{
+// 类Triagle是Figure的派生类
+	double la;
+	double lb;
+	double lc;
+public:
+	Triangle(double la,double lb,double lc){
+		this->la =la ;this->lb=lb; this->lc=lc;
+		}
+	double getArea(){
+		double s= (la+lb+lc)/2.0;
+		return sqrt(s*(s-la)*(s-lc));
+}
+};
+
+void main(){
+
+Figure*figures[3]={
+	new Triangle(2,3,3),new Rectangle(5,8),new Square(5)};
+
+	for(int i=0;i<3;i++){
+		cout<< "figures["<<"]area" << (figures[i])->getArea() << endl;
+}
+}
+
+10.3 异常处理
+
+1.终止程序
+2.返回一个表示错误的值
+３．返回一个合法值，让程序处于某种非法的状态
+４．　调用一个预先准备好在出现"错误"的情况下的函数
+
+
+try,catch,finally,throw
+
+try,一般放入程序或函数的工作代码(出错时发生异常的代码)
+catch,是程序发生异常后的出错代码，每个catch块指定捕获和处理一种异常
+finally块中放着不论是否出错都需要处理的ｄｉａｍ
+throw用来声明函数可以抛出的异常和程序检测到出错时用来抛出的一个异常对象
+
+try{
+	//
+}
+
+catch(Exception1 e){
+}
+
+finanlly{}
+
+
+异常被抛出后，一旦被异常处理器收到就被销毁。异常处理由关键字catch引导，
+一般紧跟在try块之后，
+
+
+如果一个异常信号被抛出，异常处理中第一个参数与异常抛出对象相匹配的函数将捕获
+该异常信号，然后进入相应的catch语句，执行异常处理代码
+
+
+函数的所有潜在异常类型随关键字throw插入在函数说明中
+
+void f() throw();
+
+传统函数声明void f();意味着函数可能抛出任何一种异常。
+如果声明void f() throw(); 则意味着不会抛出异常
+
+
+#include<iostream>
+
+using namespace std;
+
+int divide(int x,int y)
+{ if(y==0) throw 0;
+	return x/y;
+} // end of divide
+
+void test()
+{
+	int a,b;
+	try {
+		cout << "请输入两个整数a和b(用于计算a除以b的商):";
+		cin >> a>> b;
+		int k = divide(a,b);
+		cout << a<< "/"<<b<<"=" <<k;
+}
+
+catch(int){
+	cout << "重新输入整数a和b(b的值不能为0):";
+	cin>>a>>b;
+	ink k= divide(a,b);
+	cout<< a<<"/"<<b<< "="<<k<<endl;
+｝
+
+}// end of test
+
+int main(void)
+{
+	try{
+		test();
+} catch(int){ cout << "请重新运行程序"<<endl;}
+
+return 0;
+}// end of main
+
+
+10.4 标准库
+
+c++标准库可以分为标准函数库和类库两部分
+
+
+
+标准函数库包含了所有的c标准库，有输入输出，字符串和字符处理，数学运算，时间，
+日期和本地化，动态分配和其他处理等，为了支持类型安全，做了一定的添加和修改
+
+
+面向对象类库定义了一些常见的类，如i/o类，string类，数值类和STL的容器类
+算法，函数对象，迭代器，分配器，以及异常处理类
+
+１０．４．１　i/o流库
+
+
+1. 抽象流基类
+ios为流基类
+
+2.输入流类
+
+istream,ifstream, istream,withassign ,istrstream
+
+3. 输出流类
+
+ostream, ofstream, ostream_withassign, ostrstream
+
+4.输入输出流类
+
+iostream,fstream,strstream,stdiostream
+
+5.缓冲流类
+
+streambuf,filebuf,strstreambuf,stdiobuf
+
+
+6.预定义流初始化类
+
+
+cin,
+cerr
+clog
+cout
+可以利用无参的构造函数打开文件流，然后调用open
+
+ofstream outfile;
+outfile.open("outfile",iosmode);
+
+也可调用带参数的构造函数，指定文件名和打开方式
+
+ofstream outfile("outfile",iosmode);
+
+
+在文件操作结束时可以用close()成员函数关闭该文件
+
+outfile.close()
+
+
+
 
 
 
